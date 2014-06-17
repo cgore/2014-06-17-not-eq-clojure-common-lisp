@@ -215,8 +215,8 @@
   \h{\lispn{1} versus \lispn{2} \ldots}
 
   \begin{description}
-  \item[\lispn{1}] Original Lisp, Common Lisp, Emacs Lisp, \ldots
-  \item[\lispn{2}] Scheme, Clojure, \ldots
+  \item[\lispn{2}] Original Lisp, Common Lisp, Emacs Lisp, \ldots
+  \item[\lispn{1}] Scheme, Clojure, \ldots
   \end{description}
 
   In a \lispn{2}, there are separate namespaces associated for variables and for
