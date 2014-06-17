@@ -1,0 +1,9 @@
+The image of the Saint Louis coin is from:
+
+http://commons.wikimedia.org/wiki/File:SaintLouisCoin.JPG#mediaviewer/File:SaintLouisCoin.JPG
+
+It was created by: http://commons.wikimedia.org/wiki/User:PHGCOM
+
+It is licensed as: http://creativecommons.org/licenses/by-sa/3.0/
+
+The Saint Louis Clojure Meetup logo is derived from that by me (Christopher Mark Gore), and is placed under the same license.

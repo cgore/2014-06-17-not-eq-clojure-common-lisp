@@ -1,0 +1,568 @@
+% Copyright (c) 2014, Christopher Mark Gore,
+% All rights reserved.
+%
+% 2317 South River Road, Saint Charles, Missouri 63303 USA.
+% Web: http://cgore.com
+% Email: cgore@cgore.com
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are met:
+%
+%     * Redistributions of source code must retain the above copyright
+%       notice, this list of conditions and the following disclaimer.
+%
+%     * Redistributions in binary form must reproduce the above copyright
+%       notice, this list of conditions and the following disclaimer in the
+%       documentation and/or other materials provided with the distribution.
+%
+%     * Neither the name of Christopher Mark Gore nor the names of other
+%       contributors may be used to endorse or promote products derived from
+%       this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+% AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+% IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+% ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+% LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+% CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+% SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+% INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+% CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+% ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+
+\documentclass{seminar}
+
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{bookman}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage[dvips]{pstricks}
+\usepackage{relsize}
+\usepackage{semcolor,slidesec}
+\input{seminar.bug}
+\input{seminar.bg2}
+\usepackage{textcomp}
+\usepackage[normalem]{ulem}
+
+\definecolor{fillcolor}{rgb}{0.9,0.95,1.0}
+\definecolor{linecolor}{rgb}{0.8,0.85,0.9}
+\slideframe[\psset{fillcolor=fillcolor,linecolor=linecolor}]{scshadow}
+
+\newcommand{\hc}{Blue}
+\newcommand{\h}[1]{\slideheading{\textcolor{\hc}{#1}}}
+\newcommand{\tq}[1]{\textcolor{Green}{\textbf{#1}}}
+\newcommand{\tbd}[1]{\textcolor{Blue}{\textit{#1}}}
+\newcommand{\TODO}{{\Huge \textcolor{Red}{\textbf{{TO DO}}}}}
+
+\definecolor{commentcolor}{rgb}{0.1,0.1,0.8}
+\definecolor{identifiercolor}{rgb}{0.2,0.2,0.2}
+\definecolor{keywordcolor}{rgb}{0.1,0.3,0.1}
+\definecolor{cexcolor}{rgb}{0.25,0.25,0.4}
+\lstset{
+  basicstyle=\small\ttfamily,
+  language=Lisp,
+  morekeywords={make-instance},
+  escapeinside={\%*}{*)},
+  commentstyle=\itshape\color{commentcolor},
+  identifierstyle=\color{identifiercolor},
+  keywordstyle=\color{keywordcolor},
+  upquote=true
+}
+
+\newcommand{\cex}[1]{\textcolor{cexcolor}{\textit{#1}}}
+
+\newcommand{\fullSlideImage}[1]{
+  \begin{center}
+    \includegraphics[width=4in,height=2.5in,keepaspectratio=true]{#1}
+  \end{center}
+}
+
+
+\newtheorem{axiom}{Axiom}
+\newtheorem{definition}{Definition}
+\newtheorem{question}{Question}
+
+\newcommand{\awesome}{\textcolor{Green}{\textsc{Awesome!}}}
+\newcommand{\crap}{\textcolor{Red}{\textsc{Crap!}}}
+\newcommand{\meh}{\textcolor{Gray}{\textsc{Meh}}}
+\newcommand{\lispn}[1]{Lisp\textsubscript{#1}}
+
+\title{\psshadowbox{(not (eq clojure common-lisp))}}
+\author{Christopher Mark Gore\\
+  \texttt{http://www.cgore.com}\\
+  \texttt{cgore@cgore.com}\\
+  \raisebox{-2pt}{\includegraphics[height=10pt]{twitter-logo-bgmatch.eps}}
+  \texttt{@cgore}}
+\date{Tuesday, June 17, \textsc{ad} 2014}
+
+\begin{document}
+
+\raggedslides[0mm]
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \color{\hc}
+
+  % The image of the Saint Louis coin is from:
+  % http://commons.wikimedia.org/wiki/File:SaintLouisCoin.JPG#mediaviewer/File:SaintLouisCoin.JPG
+  % It was created by: http://commons.wikimedia.org/wiki/User:PHGCOM
+  % It is licensed as: http://creativecommons.org/licenses/by-sa/3.0/
+  % The Saint Louis Clojure Meetup logo is derived from that by me (Christopher
+  % Mark Gore), and is placed under the same license.
+
+  \begin{center}
+    \includegraphics[height=1.25in]{STLClojure.eps}
+  \end{center}
+
+  \maketitle
+
+  \color{Black}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Computer Science!}
+
+  It's like math!
+
+  \begin{axiom}
+    Lisp = \awesome
+  \end{axiom}
+  \begin{axiom}
+    Java = \crap
+  \end{axiom}
+  \begin{definition}
+    Clojure = Lisp + Java.
+  \end{definition}
+  \begin{question}
+    Does \awesome\ + \crap\ = \awesome,\\
+    or \crap,\\
+    or possibly just \meh?
+  \end{question}
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Java is \crap\ \ldots}
+
+  \begin{center}
+    \fullSlideImage{im-not-saying-java-sucks.eps}
+  \end{center}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots Java is \crap\ \ldots}
+
+  Here are some of the reasons why Java (the programming language) sucks.
+
+  \begin{itemize}
+  \item No lexically scoped local functions,
+  \item No macro system,
+  \item No inlined functions,
+  \item Static methods aren't really class methods,
+  \item No multiple inheritance (interfaces suck),
+  \item Integers aren't objects,
+  \item \texttt{String} is \texttt{final},
+  \item No \texttt{typedef},
+  \item Still has integer overflow,
+  \end{itemize}
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots Java is \crap}
+
+  \begin{itemize}
+  \item \texttt{BigInteger} exists, but isn't integrated at all,
+  \item No real enums, and no easy way to make them,
+  \item No pointers, not even a weak form of them,
+  \item No list literals,
+  \item CamelCaseIsStupidButEveryJavaProgramSeemsToUseIt,
+  \item AndYesTheVariableNamesReallyAreThisLongToo,
+  \item \ldots
+  \end{itemize}
+
+  But Clojure isn't Java, so none of these are problems anymore!
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Access to All of Java's Libraries is \awesome}
+
+  As a giant conspiracy to make programmers less effective, Java was pushed all
+  through the late 1990's and early 2000's in many major universities.  Because
+  of this, many, many good libraries exist for the JVM, because many, many
+  programmers left school thinking that programming = Java.
+
+  \begin{itemize}
+  \item GUIs: SWING, SWT, \ldots
+  \item Parsing HTML, XML, JSON, \ldots
+  \item Databases: JDBC, Hibernate, \ldots
+  \end{itemize}
+
+  No matter what it is, there's a Java library to do it.  This is one of the
+  things that really does hold Common Lisp back, a lack of good libraries for a
+  lot of normal, everyday stuff.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\lispn{1} versus \lispn{2} \ldots}
+
+  \begin{description}
+  \item[\lispn{1}] Original Lisp, Common Lisp, Emacs Lisp, \ldots
+  \item[\lispn{2}] Scheme, Clojure, \ldots
+  \end{description}
+
+  In a \lispn{2}, there are separate namespaces associated for variables and for
+  functions.  This means the following code works in Common Lisp:
+
+\begin{lstlisting}
+(let ((list '(1 2 3 4)))
+  (defun listier (list)
+    (list (list list)))
+  (listier '(1 2 3 4))) ; Returns '(((1 2 3 4)))
+\end{lstlisting}
+
+  In a \lispn{1}, functions are in the variable namespace, so you will need to
+  call the variable \texttt{the-list}, \texttt{lst}, \texttt{l}, etc.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots\ \lispn{1} versus \lispn{2}}
+
+  Referencing functions is a little more verbose in \lispn{2}.
+
+\begin{lstlisting}
+(mapcar #'sin '(0.1 0.2 0.3 0.4))
+\end{lstlisting}
+
+  Versus just a variable in a \lispn{1} like Clojure.
+
+\begin{lstlisting}
+(map sin [0.1 0.2 0.3 0.4])
+\end{lstlisting}
+
+  It basically is, most of the time, just this:
+
+  \begin{description}
+  \item[\lispn{1}] Less typing with FP approaches.
+  \item[\lispn{2}] Better names for arguments and variables when it really is
+    \textit{just any old list/vector/map/etc.} (All of these functions should
+    actually probably be named \texttt{make-list}, etc.)
+  \end{description}
+
+  And so, if you really prefer FP, you generally also really prefer \lispn{1}.
+  Otherwise, a \lispn{2} is more convenient.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\lispn{5} versus \lispn{6}? \ldots}
+
+  The names \lispn{1} and \lispn{2} are actually somewhat incorrect.  In
+  actuality, \lispn{1}~=~\lispn{5} and \lispn{2}~=~\lispn{6}.  This is because
+  there are actually a lot more namespaces than just variables and functions.
+
+  \begin{enumerate}
+  \item Values (\lispn{1})
+  \item Functions (in a \lispn{2}), but also:
+  \item Blocks,
+  \item Tags,
+  \item Type names, and
+  \item Declaration names.
+  \end{enumerate}
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots\ \lispn{5} versus \lispn{6}? \ldots}
+
+  Values are \textit{``nouns.''}
+
+\begin{lstlisting}
+(let ((x 1) (y 2) (+ x y)) ; x and y are values.
+\end{lstlisting}
+
+  Functions are \textit{``verbs.''}
+
+\begin{lstlisting}
+(defun f (x) (+ x 4077)) ; f is a function.
+\end{lstlisting}
+
+  Blocks are named lexical exit points:
+
+\begin{lstlisting}
+(let ((x (random 1.0))) ; %* {\textcolor{commentcolor}{$x \in [0.0,1.0) \forall x$} *)
+  (block b
+    (if (< x 0.5)
+      (return-from b 0) ; 50% chance
+      (if (< x 0.75)
+        (return-from b 1) ; 25% chance
+        (return-from b 2))))) ; remaining 25%
+\end{lstlisting}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots\ \lispn{5} versus \lispn{6}? \ldots}
+
+Tags are just like \textsc{Fortran} and \textsc{Basic}:
+
+\begin{lstlisting}
+(prog (name)
+  get-name
+    (format t "What is your name? ")
+    (setf name (read-line))
+    (when (zerop (length name)) (go goodbye))
+    (format t "Hi, ~A!~%" name)
+    (go get-name)
+  goodbye
+    (format t "Goodbye!'~%"))
+\end{lstlisting}
+
+That's right, Common Lisp has GOTO!
+
+It seemed like a good idea in 1958.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots\ \lispn{5} versus \lispn{6}? \ldots}
+
+  Type names are separate, and this provides the same naming convenience.
+
+\begin{lstlisting}
+ (defun equidimensional (a)
+   (or (< (array-rank a) 2)
+       (apply #'= (array-dimensions a))))
+ (deftype square-matrix (&optional type size)
+   `(and (array ,type (,size ,size))
+         (satisfies equidimensional)))
+(defun something-cool (square-matrix)
+  (declare (type square-matrix square-matrix))
+  (do (cool (linear (algebra (stuff square-matrix))))))
+\end{lstlisting}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots\ \lispn{5} versus \lispn{6}?}
+
+Declarations are special directives to the underlying Common Lisp system.
+
+\begin{lstlisting}
+(defun nonsense (k x z)
+  (foo z x) ; First call to foo
+  (let ((j (foo k x)) ; Second call to foo
+        (x (* k k)))
+    (declare (inline foo) (special x z))
+    (foo x j z))) ; Third call to foo
+\end{lstlisting}
+
+You can make your own, and they are their own namespace.
+
+\begin{lstlisting}
+(declaim (declaration author target-language))
+(declaim (target-language ada))
+(declaim (author "Harry Tweeker"))
+\end{lstlisting}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\lispn{n} $\forall n \in \mathbb{Z}^+$?}
+
+  We can make our own namespaces!
+
+\begin{lstlisting}
+(defmacro defun2 ...)
+(defmacro funcall2 ...)
+(defmacro function2 ...)
+;; A few more ...
+(defun foo (x) (format t "Hi ~A!~%" x))
+(defun2 foo (x) (format t "Bye ~A!~%" x))
+(foo "Johnny") ; Hi Johnny!
+(funcall2 'foo "Johnny") ; Bye Johnny!
+\end{lstlisting}
+
+The point is, when we do \texttt{(foo x y z)}, It's just a shortcut.
+We are actually really doing:
+
+\begin{lstlisting}
+(funcall (function f) x y z)
+\end{lstlisting}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Lambda is Better Than Fn?\\
+  Fn is Better Than Lambda?}
+
+  This is really a problem with our inferior keyboards.
+
+  \fullSlideImage{space-cadet-bgmatch.eps}
+
+  \h{$\lambda > f$}
+  
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Defun is Better Than Defn?\\
+  Defn is Better than Defun?}
+
+  This is probably a keyboard problem too.
+
+  I think I know how to fix this.
+
+  \fullSlideImage{hhkb-lambda.eps}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Common Lisp's Cond is \crap \ldots}
+
+\begin{lstlisting}
+(cond ((< age 1)  "infant")
+      ((< age 13) "child")
+      ((< age 18) "teenager")
+      ((< age 65) "adult")
+      (t          "ancient"))
+\end{lstlisting}
+
+  ``Common Lisp's \texttt{cond} has too many parens, lets get rid of them!''
+
+\begin{lstlisting}
+(cond (< age 1)  "infant"
+      (< age 13) "child"
+      (< age 18) "teenager"
+      (< age 65) "adult"
+      :else      "ancient")
+\end{lstlisting}
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{\ldots Common Lisp's Cond is \xout{\crap} \awesome}
+
+  Actually, no it isn't, having implicit \texttt{progn}'s are nice.
+
+\begin{lstlisting}
+(cond ((blue? the-color)
+       (format t "Blue is great!~\%")
+       :blue)
+      ((green? the-color)
+       (format t "Green, the color of money.~\%")
+       :green)
+      ((red? the-color)
+       (format t "Blood red sun ...~\%")
+       red)
+      (t (format t "What?~\%"))
+\end{lstlisting}
+
+  Perhaps add a \texttt{condn} that works like Common Lisp's \texttt{cond}?
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Hashmap Syntax is \awesome}
+
+  Here's how to make a hashmap in Clojure:
+
+\begin{lstlisting}
+{:name "John McCarthy"
+ :born [1927 09 04]
+ :died [2011 10 24]}
+\end{lstlisting}
+
+  How do we do that in Common Lisp?
+
+\begin{lstlisting}
+(let ((h (make-hash-table)))
+  (setf (gethash :name h) "John McCarthy"
+        (gethash :born h) '(1927 09 04)
+        (gethash :died h) '(2011 10 24)))
+\end{lstlisting}
+
+  Generally for that sort of stuff, you will use a structure or a class instead,
+  so the syntax is really irritating.\footnote{If you have my $\Sigma$ library
+    then this becomes much more reasonable, thanks to the \texttt{populate-hash-table} function.}
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Lazy Evaluation is \awesome}
+
+  \begin{description}
+  \item[Na\"ive Approach] Just write the code like you can load \textit{all the
+    data}, and then be confused when bad things happen.
+  \item[Streaming Approach] Instead, write the code so that you only take one at
+    a time, and then handle it that way, saving memory.
+  \item[Batched Approach] Determine a good amount to take at a time, and handle
+    it in batches.
+  \end{description}
+
+  The way I understand it, Clojure's lazy evaluation actually does batching of
+  some sort, which is \awesome\ if true.  How do we tune this?
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Vector Syntax is \ldots \meh}
+
+  \begin{itemize}
+  \item Honestly, the brackets just seem to get in the way.
+  \item I really wish \texttt{defn} didn't use a vector for it's arguments.
+  \item They interfere with my normal approach to closing mismatched parens from
+    Common Lisp, which is to just spam the close-paren key until the editor
+    highlights one as bad, and then backspace.\footnote{This is less of a
+      problem now that I have finally figured out Paredit mode.}
+  \end{itemize}
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{Threading Operators are \awesome}
+
+  How to make a REPL?
+  Or how to make a LPER?
+  Sometimes the order really does matter.
+
+\begin{lstlisting}
+  (-> read eval print loop) ; versus ...
+  (loop (read (eval (print))))
+\end{lstlisting}
+
+  I really like \texttt{->>} and \texttt{as->} too.  I think there are a lot
+  more of these that are missing though, and just haven't been thought about yet.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \h{The Final Analysis}
+
+  \begin{itemize}
+  \item Clojure is a really good language choice these days.
+  \item A lot of stuff should be borrowed into Common Lisp from Clojure.
+  \item Building on top of the JVM was actually a really good idea to help it
+    get off the ground in the beginning.
+  \item Clojure has some really nice features on it's own too, and some
+    interesting approaches to some things.
+  \end{itemize}
+
+  I just wish Clojure was a little less insistent about things sometimes, about
+  doing things \textit{the Clojure way.}  It seems opinionated in the same way
+  as Python: yes, 99\% of the time it is correct, I shouldn't do it that way, I
+  should do it the way it wants, but there is that other 1\%.
+
+\end{slide}
+
+\begin{slide} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{center}
+    \textcolor{\hc}{\textbf{\emph{\Huge{Questions?}}}}
+  \end{center}
+\end{slide}
+
+\end{document}
