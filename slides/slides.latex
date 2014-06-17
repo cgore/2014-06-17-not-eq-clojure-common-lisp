@@ -286,7 +286,7 @@
   Values are \textit{``nouns.''}
 
 \begin{lstlisting}
-(let ((x 1) (y 2) (+ x y)) ; x and y are values.
+(let ((x 1) (y 2)) (+ x y)) ; x and y are values.
 \end{lstlisting}
 
   Functions are \textit{``verbs.''}
@@ -391,7 +391,7 @@ You can make your own, and they are their own namespace.
 (funcall2 'foo "Johnny") ; Bye Johnny!
 \end{lstlisting}
 
-The point is, when we do \texttt{(foo x y z)}, It's just a shortcut.
+The point is, when we do \texttt{(f x y z)}, It's just a shortcut.
 We are actually really doing:
 
 \begin{lstlisting}
